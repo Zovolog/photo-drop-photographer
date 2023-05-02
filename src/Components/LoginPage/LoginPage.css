@@ -7,8 +7,19 @@
   padding: 10px;
   font-size: 18px;
   outline: none;
-  
 }
 .input-form::placeholder {
   font-size: 18px;
+}
+.bt-login {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: blueviolet;
+  outline: none;
+  border: 1px solid black;
+}
+.bt-login:hover {
+  background-color: rgb(154, 92, 212);
 }

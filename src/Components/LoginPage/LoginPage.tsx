@@ -47,6 +47,7 @@ export const LoginPage: React.FC = () => {
               e.preventDefault();
               loginning(login, password);
             }}
+            className="bt-login"
           >
             Login
           </button>
