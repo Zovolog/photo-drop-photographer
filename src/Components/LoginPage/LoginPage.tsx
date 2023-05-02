@@ -50,9 +50,6 @@ export const LoginPage: React.FC = () => {
           >
             Login
           </button>
-          <a href="https://childofukraine.retool.com/embedded/public/7603d391-851a-4a30-93d8-471dc4b9c8ea">
-            Don`t have account?
-          </a>
         </div>
       </form>
     </div>
