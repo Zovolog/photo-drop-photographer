@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./LoginPage.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { token } from "../../App";
 export const LoginPage: React.FC = () => {
   const [login, getLogin] = useState("");
   const [password, getPassword] = useState("");
   const navigate = useNavigate();
+  const { isAuthorized, getIsAuthorized } = useContext(token);
+  useEffect(() => {
+    getIsAuthorized(false);
+    sessionStorage.clear();
+  }, []);
   const loginning = (login: string, password: string) => {
     axios({
       url: `https://photos-ph.onrender.com/login`,
@@ -17,13 +23,16 @@ export const LoginPage: React.FC = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.accessToken);
-        response.data.accessToken && navigate("/profile");
+        console.log(response.data);
+        localStorage.setItem("access_token", response.data.accessToken);
+        getIsAuthorized(true);
+        sessionStorage.setItem("access_token_ph", "true");
+        response.data.accessToken && navigate("/album-list");
       })
       .catch(function (error) {});
   };
   return (
-    <div>
+    <div className="login-page">
       <form autoComplete={"off"} className="input-block">
         <input
           placeholder="Type your login..."

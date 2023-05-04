@@ -1,0 +1,56 @@
+.bt-blue {
+  border: 1px solid black;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  background-color: rgb(0, 60, 133);
+  color: white;
+  font-size: 600;
+  font-size: 0.8rem;
+  margin-right: 10px;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+.album-header {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 700;
+}
+.validate-message {
+  font-size: 0.5rem;
+  color: red;
+}
+.input-new-album {
+  margin-bottom: 15px;
+  padding: 0.5rem;
+  border: 1.5px solid black;
+}
+.input-new-album:last-child {
+  margin-bottom: 5px;
+}
+.body {
+  padding: 25px;
+  background-color: white;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+.album {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.album-text-part {
+  margin-left: 20px;
+}
+.album:hover {
+  background-color: rgb(202, 202, 202);
+}
+.icon {
+  height: 50px;
+}
