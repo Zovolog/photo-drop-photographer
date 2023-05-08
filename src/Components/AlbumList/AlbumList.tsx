@@ -10,9 +10,12 @@ import {
 import "./AlbumList.css";
 import logo from "./logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { Loader } from "../Loader/Loader";
+
 export const AlbumList: React.FC = () => {
-  const access_token = localStorage.getItem("access_token");
   const { getIsAuthorized } = useContext(token);
+  const [cookies, setCookie] = useCookies(["access_token"]);
   const [open, setOpen] = useState(false);
   const [data, getData] = useState([]);
   const [name, getName] = useState("");
@@ -21,6 +24,7 @@ export const AlbumList: React.FC = () => {
   const [validateName, showValidateName] = useState("");
   const [validateLocation, showValidateLocation] = useState("");
   const [validateDatepicker, showValidateDatepicker] = useState("");
+  const [count, setCount] = useState(0);
   const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,7 +45,7 @@ export const AlbumList: React.FC = () => {
       axios({
         url: `https://photos-ph.onrender.com/create-album`,
         method: "post",
-        headers: { ["authorization"]: access_token },
+        headers: { ["authorization"]: cookies.access_token },
         data: {
           name: name,
           location: location,
@@ -50,6 +54,7 @@ export const AlbumList: React.FC = () => {
       })
         .then(function (response) {
           setOpen(false);
+          setCount(count + 1);
         })
         .catch(function (error) {
           console.log(error.data);
@@ -59,29 +64,32 @@ export const AlbumList: React.FC = () => {
 
   useEffect(() => {
     axios({
-      url: `https://photos-ph.onrender.com/me`,
+      url: `https://photos-ph.onrender.com/all-albums`,
       method: "get",
-      headers: { ["authorization"]: access_token },
+      headers: { ["authorization"]: cookies.access_token },
     })
       .then(function (response) {
-        getIsAuthorized(true);
+        console.log(response.data);
+        getData(response.data.data);
       })
       .catch(function (error) {
-        navigate("/login");
+        navigate("/");
       });
   }, []);
   useEffect(() => {
     axios({
       url: `https://photos-ph.onrender.com/all-albums`,
       method: "get",
-      headers: { ["authorization"]: access_token },
+      headers: { ["authorization"]: cookies.access_token },
     })
       .then(function (response) {
         console.log(response.data);
         getData(response.data.data);
       })
-      .catch(function (error) {});
-  }, []);
+      .catch(function (error) {
+        navigate("/");
+      });
+  }, [count]);
   return (
     <div>
       <div className="header">
@@ -92,22 +100,26 @@ export const AlbumList: React.FC = () => {
         </button>
       </div>
       <div className="body">
-        <div className="album-list">
-          {data.map((album: any, i) => (
-            <Link key={i} to={`/album/${album.albumId}`}>
-              <div className="album">
-                <img
-                  src={`https://api.dicebear.com/5.x/initials/svg?seed=${album.name}`}
-                  className="icon"
-                />
-                <div className="album-text-part">
-                  <p>{album.name}</p>
-                  <p>{album.location}</p>
+        {data.length > 0 ? (
+          <div className="album-list">
+            {data.map((album: any, i) => (
+              <Link key={i} to={`/album/${album.albumId}`}>
+                <div className="album">
+                  <img
+                    src={`https://api.dicebear.com/5.x/initials/svg?seed=${album.name}`}
+                    className="icon"
+                  />
+                  <div className="album-text-part">
+                    <p>{album.name}</p>
+                    <p>{album.location}</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <Loader />
+        )}
       </div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add new album</DialogTitle>

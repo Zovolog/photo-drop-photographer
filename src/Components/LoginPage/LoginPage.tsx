@@ -3,14 +3,19 @@ import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { token } from "../../App";
+import { useCookies } from "react-cookie";
 export const LoginPage: React.FC = () => {
   const [login, getLogin] = useState("");
   const [password, getPassword] = useState("");
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["access_token"]);
   const { isAuthorized, getIsAuthorized } = useContext(token);
   useEffect(() => {
     getIsAuthorized(false);
     sessionStorage.clear();
+    setCookie("access_token", "", {
+      path: "/",
+    });
   }, []);
   const loginning = (login: string, password: string) => {
     axios({
@@ -24,7 +29,9 @@ export const LoginPage: React.FC = () => {
     })
       .then(function (response) {
         console.log(response.data);
-        localStorage.setItem("access_token", response.data.accessToken);
+        setCookie("access_token", response.data.accessToken, {
+          path: "/",
+        });
         getIsAuthorized(true);
         sessionStorage.setItem("access_token_ph", "true");
         response.data.accessToken && navigate("/album-list");

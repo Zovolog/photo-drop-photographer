@@ -1,6 +1,6 @@
-import React, { createContext, useState } from "react";
-import "./App.css";
+import { createContext, useState } from "react";
 import { Main } from "./Main";
+import { useCookies } from "react-cookie";
 interface auth {
   isAuthorized: any;
   getIsAuthorized: any;
