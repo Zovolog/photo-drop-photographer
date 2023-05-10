@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { token } from "../../App";
 import {
   Dialog,
   DialogActions,
@@ -14,8 +13,7 @@ import { useCookies } from "react-cookie";
 import { Loader } from "../Loader/Loader";
 
 export const AlbumList: React.FC = () => {
-  const { getIsAuthorized } = useContext(token);
-  const [cookies, setCookie] = useCookies(["access_token"]);
+  const [cookies] = useCookies(["access_token"]);
   const [open, setOpen] = useState(false);
   const [data, getData] = useState([]);
   const [name, getName] = useState("");
@@ -35,11 +33,11 @@ export const AlbumList: React.FC = () => {
   };
 
   const sendData = (name: string, location: string, datepicker: string) => {
-    if (!name) {
+    if (name === "") {
       showValidateName("Please type name");
-    } else if (!location) {
+    } else if (location === "") {
       showValidateLocation("Please type location");
-    } else if (!datepicker) {
+    } else if (datepicker === "") {
       showValidateDatepicker("Please type datepicker");
     } else {
       axios({
@@ -55,6 +53,12 @@ export const AlbumList: React.FC = () => {
         .then(function (response) {
           setOpen(false);
           setCount(count + 1);
+          getName("");
+          getLocation("");
+          getDatepicker("");
+          showValidateName("");
+          showValidateLocation("");
+          showValidateDatepicker("");
         })
         .catch(function (error) {
           console.log(error.data);
@@ -95,7 +99,7 @@ export const AlbumList: React.FC = () => {
       <div className="header">
         <img src={logo} alt="logo" height={"50%"} />
         <p className="album-header">Album page</p>
-        <button className="bt-blue" onClick={handleClickOpen}>
+        <button className="bt-add" onClick={handleClickOpen}>
           Add album
         </button>
       </div>
@@ -150,12 +154,12 @@ export const AlbumList: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <button
-            className="bt-blue"
+            className="bt-add"
             onClick={() => sendData(name, location, datepicker)}
           >
             Add album
           </button>
-          <button className="bt-blue" onClick={handleClose}>
+          <button className="bt-cancel" onClick={handleClose}>
             Cancel
           </button>
         </DialogActions>

@@ -1,0 +1,22 @@
+.bt-add-img {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px;
+  color: white;
+  background-color: rgb(0, 149, 255);
+  font-weight: 700;
+  outline: none;
+}
+.img-icon {
+  width: 250px;
+  margin-top: 10px;
+}
+.block-images {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  flex-wrap: wrap;
+}
