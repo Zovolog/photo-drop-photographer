@@ -30,21 +30,22 @@ body {
   padding: 10px;
   background-color: #ee5684;
   color: white;
-  font-size: 600;
+
   font-size: 0.9rem;
   margin-right: 10px;
   font-weight: 700;
 }
 .bt-cancel {
-  border: 1px solid black;
   outline: none;
+  border: none;
   cursor: pointer;
   padding: 10px;
   background-color: red;
   color: white;
-  font-size: 600;
+  font-weight: 700;
   font-size: 0.8rem;
   margin-right: 10px;
+  border-radius: 20px;
 }
 .bt-cancel:hover {
   background-color: rgb(255, 71, 71);

@@ -116,24 +116,24 @@ export const AlbumList: React.FC = () => {
         <DialogTitle>Add new album</DialogTitle>
         <DialogContent>
           <div className="modal-body">
+            <p className="input-block-name">Name</p>
             <input
               type="text"
-              className="input-new-album"
-              placeholder="Name"
+              className="input-form"
               onChange={(e) => getName(e.currentTarget.value)}
             />
             <p className="validate-message">{validateName}</p>
+            <p className="input-block-name">Location</p>
             <input
               type="text"
-              className="input-new-album"
-              placeholder="Location"
+              className="input-form"
               onChange={(e) => getLocation(e.currentTarget.value)}
             />
             <p className="validate-message">{validateLocation}</p>
+            <p className="input-block-name">Datepicker</p>
             <input
               type="text"
-              className="input-new-album"
-              placeholder="Datepicker"
+              className="input-form"
               onChange={(e) => getDatepicker(e.currentTarget.value)}
             />
             <p className="validate-message">{validateDatepicker}</p>
