@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogActions,
@@ -8,14 +8,15 @@ import {
 } from "@mui/material";
 import "./AlbumList.css";
 import logo from "./logo.png";
-import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Loader } from "../Loader/Loader";
-
+import { Api } from "../../hooks/api";
+import ImageUploader from "../ImageUploader/ImageUploader";
+import plus from "./plus.png";
 export const AlbumList: React.FC = () => {
   const [cookies] = useCookies(["access_token"]);
+  const { getAlbums, albums } = Api("all-albums");
   const [open, setOpen] = useState(false);
-  const [data, getData] = useState([]);
   const [name, getName] = useState("");
   const [location, getLocation] = useState("");
   const [datepicker, getDatepicker] = useState("");
@@ -23,7 +24,8 @@ export const AlbumList: React.FC = () => {
   const [validateLocation, showValidateLocation] = useState("");
   const [validateDatepicker, showValidateDatepicker] = useState("");
   const [count, setCount] = useState(0);
-  const navigate = useNavigate();
+  const [openLoaderPhotos, setOpenLoaderPhotos] = useState(false);
+  const [albumId, setAlbumId] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,6 +53,7 @@ export const AlbumList: React.FC = () => {
         },
       })
         .then(function (response) {
+          console.log(response.data);
           setOpen(false);
           setCount(count + 1);
           getName("");
@@ -67,32 +70,7 @@ export const AlbumList: React.FC = () => {
   };
 
   useEffect(() => {
-    axios({
-      url: `https://photos-ph.onrender.com/all-albums`,
-      method: "get",
-      headers: { ["authorization"]: cookies.access_token },
-    })
-      .then(function (response) {
-        console.log(response.data);
-        getData(response.data.data);
-      })
-      .catch(function (error) {
-        navigate("/");
-      });
-  }, []);
-  useEffect(() => {
-    axios({
-      url: `https://photos-ph.onrender.com/all-albums`,
-      method: "get",
-      headers: { ["authorization"]: cookies.access_token },
-    })
-      .then(function (response) {
-        console.log(response.data);
-        getData(response.data.data);
-      })
-      .catch(function (error) {
-        navigate("/");
-      });
+    getAlbums();
   }, [count]);
   return (
     <div>
@@ -104,10 +82,10 @@ export const AlbumList: React.FC = () => {
         </button>
       </div>
       <div className="body">
-        {data.length > 0 ? (
+        {albums.length > 0 ? (
           <div className="album-list">
-            {data.map((album: any, i) => (
-              <Link key={i} to={`/album/${album.albumId}`}>
+            {albums.map((album: any, i) => (
+              <div key={i}>
                 <div className="album">
                   <img
                     src={`https://api.dicebear.com/5.x/initials/svg?seed=${album.name}`}
@@ -117,8 +95,17 @@ export const AlbumList: React.FC = () => {
                     <p>{album.name}</p>
                     <p>{album.location}</p>
                   </div>
+                  <button
+                    onClick={() => {
+                      setOpenLoaderPhotos(true);
+                      setAlbumId(album.albumId);
+                    }}
+                    className="bt-photos"
+                  >
+                    <img src={plus} className="bt-photos-icon" />
+                  </button>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         ) : (
@@ -155,7 +142,9 @@ export const AlbumList: React.FC = () => {
         <DialogActions>
           <button
             className="bt-add"
-            onClick={() => sendData(name, location, datepicker)}
+            onClick={() => {
+              sendData(name, location, datepicker);
+            }}
           >
             Add album
           </button>
@@ -164,6 +153,11 @@ export const AlbumList: React.FC = () => {
           </button>
         </DialogActions>
       </Dialog>
+      <ImageUploader
+        stateOpen={openLoaderPhotos}
+        stateClose={setOpenLoaderPhotos}
+        albumId={albumId}
+      />
     </div>
   );
 };

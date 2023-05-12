@@ -26,24 +26,55 @@
 .album {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid black;
   cursor: pointer;
   margin: 0 auto;
   margin-bottom: 10px;
+  border-radius: 25px;
+  background: linear-gradient(
+    to right,
+    #fff 0%,
+    #fff 50%,
+    #ee5684 50%,
+    #ee5684 100%
+  );
+  background-size: 200% 100%;
+  transition: background-position 0.4s ease-out;
+  font-weight: 600;
 }
 .album-list {
   padding: 25px;
   background-color: white;
+  border-radius: 15px;
   height: 100%;
   margin: 0 auto;
   margin-top: 15px;
+  -webkit-box-shadow: 0px 0px 20px -5px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 20px -5px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 20px -5px rgba(34, 60, 80, 0.2);
+  margin-bottom: 15px;
 }
 .album-text-part {
   margin-left: 20px;
 }
-.album:hover {
+.album:focus {
   background-color: rgb(202, 202, 202);
+  background-position: -100% 0;
+  color: #fff;
 }
 .icon {
   height: 50px;
+  border-radius: 25px;
+}
+.bt-photos {
+  background-color: inherit;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+.bt-photos-icon {
+  height: 45px;
+  width: auto;
 }

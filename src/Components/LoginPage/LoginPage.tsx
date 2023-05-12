@@ -41,16 +41,17 @@ export const LoginPage: React.FC = () => {
   return (
     <div className="login-page">
       <form autoComplete={"off"} className="input-block">
+        <p className="input-block-name">Sign up</p>
+        <p className="input-block-text">Email</p>
         <input
-          placeholder="Type your login..."
           type="text"
           onChange={(e) => getLogin(e.currentTarget.value)}
           className="input-form"
           readOnly
           onFocus={(e) => e.currentTarget.removeAttribute("readonly")}
         />
+        <p className="input-block-text">Password</p>
         <input
-          placeholder="Type your password..."
           type="password"
           onChange={(e) => getPassword(e.currentTarget.value)}
           className="input-form"

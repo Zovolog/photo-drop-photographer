@@ -1,6 +1,23 @@
 .input-block {
   display: flex;
   flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 20px 3px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 20px 3px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 20px 3px rgba(34, 60, 80, 0.2);
+  color: #7e7e7e;
+}
+.input-block-name {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+.input-block-text {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 .login-page {
   width: 100%;
@@ -11,23 +28,31 @@
   margin: 0 auto;
 }
 .input-form {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 10px;
   font-size: 18px;
   outline: none;
+  border-radius: 5px;
+  border: 1px solid #7e7e7e;
 }
 .input-form::placeholder {
   font-size: 18px;
 }
 .bt-login {
+  text-align: center;
   cursor: pointer;
   padding: 10px;
   font-size: 16px;
   color: white;
-  background-color: blueviolet;
+  background-color: #ee5684;
   outline: none;
-  border: 1px solid black;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 20px -5px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 20px -5px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 20px -5px rgba(34, 60, 80, 0.2);
 }
 .bt-login:hover {
-  background-color: rgb(154, 92, 212);
+  background-color: #fb447b;
 }

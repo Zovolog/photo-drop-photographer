@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: aliceblue;
+  background-color: #6d9ac4;
 }
 .row {
   display: flex;
@@ -19,22 +19,21 @@ body {
   height: 10vh;
   background-color: rgb(43, 107, 226);
   position: sticky;
-  top: 0;
+  top: -1px;
   left: 0;
 }
 .bt-add {
-  border: 1px solid black;
   outline: none;
+  border: none;
+  border-radius: 20px;
   cursor: pointer;
   padding: 10px;
-  background-color: rgb(0, 60, 133);
+  background-color: #ee5684;
   color: white;
   font-size: 600;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-right: 10px;
-}
-.bt-add:hover {
-  background-color: rgb(0, 80, 179);
+  font-weight: 700;
 }
 .bt-cancel {
   border: 1px solid black;
@@ -47,6 +46,6 @@ body {
   font-size: 0.8rem;
   margin-right: 10px;
 }
-.bt-cancel:hover{
+.bt-cancel:hover {
   background-color: rgb(255, 71, 71);
 }
