@@ -42,7 +42,7 @@ export const LoginPage: React.FC = () => {
     <div className="login-page">
       <form autoComplete={"off"} className="input-block">
         <p className="input-block-name">Sign up</p>
-        <p className="input-block-text">Email</p>
+        <p className="input-block-text">Login</p>
         <input
           type="text"
           onChange={(e) => getLogin(e.currentTarget.value)}

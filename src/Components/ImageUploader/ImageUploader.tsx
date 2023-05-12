@@ -66,6 +66,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         },
       })
       .then(function (response) {
+        stateClose(false);
         alert("Photos uploaded!");
       })
       .catch(function (error) {

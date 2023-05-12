@@ -78,7 +78,7 @@ export const AlbumList: React.FC = () => {
         <img src={logo} alt="logo" height={"50%"} />
         <p className="album-header">Album page</p>
         <button className="bt-add" onClick={handleClickOpen}>
-          Add album
+          Add List
         </button>
       </div>
       <div className="body">
