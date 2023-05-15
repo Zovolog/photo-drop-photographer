@@ -13,6 +13,7 @@ import { Loader } from "../Loader/Loader";
 import { Api } from "../../hooks/api";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import plus from "./plus.png";
+import { Link } from "react-router-dom";
 export const AlbumList: React.FC = () => {
   const [cookies] = useCookies(["access_token"]);
   const { getAlbums, albums } = Api("all-albums");
@@ -53,7 +54,6 @@ export const AlbumList: React.FC = () => {
         },
       })
         .then(function (response) {
-          console.log(response.data);
           setOpen(false);
           setCount(count + 1);
           getName("");
@@ -75,7 +75,12 @@ export const AlbumList: React.FC = () => {
   return (
     <div>
       <div className="header">
-        <img src={logo} alt="logo" height={"50%"} />
+        <img
+          src={logo}
+          alt="logo"
+          height={"50%"}
+          style={{ marginLeft: "15px" }}
+        />
         <p className="album-header">Album page</p>
         <button className="bt-add" onClick={handleClickOpen}>
           Add List
@@ -85,15 +90,17 @@ export const AlbumList: React.FC = () => {
         {albums.length > 0 ? (
           <div className="album-list">
             {albums.map((album: any, i) => (
-              <div key={i}>
+              <Link key={i} to={`/album-list/${album.albumId}`}>
                 <div className="album">
-                  <img
-                    src={`https://api.dicebear.com/5.x/initials/svg?seed=${album.name}`}
-                    className="icon"
-                  />
-                  <div className="album-text-part">
-                    <p>{album.name}</p>
-                    <p>{album.location}</p>
+                  <div className="album-block">
+                    <img
+                      src={`https://api.dicebear.com/5.x/initials/svg?seed=${album.name}`}
+                      className="icon"
+                    />
+                    <div className="album-text-part">
+                      <p>{album.name}</p>
+                      <p>{album.location}</p>
+                    </div>
                   </div>
                   <button
                     onClick={() => {
@@ -105,7 +112,7 @@ export const AlbumList: React.FC = () => {
                     <img src={plus} className="bt-photos-icon" />
                   </button>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
@@ -153,11 +160,6 @@ export const AlbumList: React.FC = () => {
           </button>
         </DialogActions>
       </Dialog>
-      <ImageUploader
-        stateOpen={openLoaderPhotos}
-        stateClose={setOpenLoaderPhotos}
-        albumId={albumId}
-      />
     </div>
   );
 };

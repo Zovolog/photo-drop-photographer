@@ -3,6 +3,7 @@ import { LoginPage } from "./Components/LoginPage/LoginPage";
 import { AlbumList } from "./Components/AlbumList/AlbumList";
 import { useContext } from "react";
 import { token } from "./App";
+import { AlbumPage } from "./Components/AlbumPage/AlbumPage";
 
 export const Main: React.FC = (props) => {
   const { isAuthorized, getIsAuthorized } = useContext(token);
@@ -14,6 +15,7 @@ export const Main: React.FC = (props) => {
           path="/album-list"
           element={isAuthorized ? <AlbumList /> : <Navigate to={"/"} />}
         />
+        <Route path="/album-list/:albumId" element={<AlbumPage />} />
       </Routes>
     </div>
   );

@@ -11,12 +11,10 @@ import "./ImageUploader.css";
 interface ImageUploaderProps {
   stateOpen: boolean;
   stateClose: any;
-  albumId: string;
 }
 const ImageUploader: React.FC<ImageUploaderProps> = ({
   stateOpen,
   stateClose,
-  albumId,
 }) => {
   const [images, setImages] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -53,7 +51,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   };
   const sendPhotos = (images: any) => {
     formData.append("clients", "432");
-    formData.append("album", albumId);
+    //formData.append("album", albumId);
     images.forEach((item: any) => {
       formData.append("files", item);
     });

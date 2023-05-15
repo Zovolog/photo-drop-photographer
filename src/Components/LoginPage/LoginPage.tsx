@@ -7,9 +7,10 @@ import { useCookies } from "react-cookie";
 export const LoginPage: React.FC = () => {
   const [login, getLogin] = useState("");
   const [password, getPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["access_token"]);
-  const { isAuthorized, getIsAuthorized } = useContext(token);
+  const { getIsAuthorized } = useContext(token);
   useEffect(() => {
     getIsAuthorized(false);
     sessionStorage.clear();
@@ -18,6 +19,7 @@ export const LoginPage: React.FC = () => {
     });
   }, []);
   const loginning = (login: string, password: string) => {
+    setIsLoading(true);
     axios({
       url: `https://photos-ph.onrender.com/login`,
       method: "post",
@@ -36,7 +38,10 @@ export const LoginPage: React.FC = () => {
         sessionStorage.setItem("access_token_ph", "true");
         response.data.accessToken && navigate("/album-list");
       })
-      .catch(function (error) {});
+      .catch(function (error) {
+        console.log(error);
+        setIsLoading(false);
+      });
   };
   return (
     <div className="login-page">
@@ -64,7 +69,7 @@ export const LoginPage: React.FC = () => {
               e.preventDefault();
               loginning(login, password);
             }}
-            className="bt-login"
+            className={isLoading ? "bt-login-disabled" : "bt-login"}
           >
             Login
           </button>
