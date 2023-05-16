@@ -30,7 +30,6 @@ export const LoginPage: React.FC = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data);
         setCookie("access_token", response.data.accessToken, {
           path: "/",
         });

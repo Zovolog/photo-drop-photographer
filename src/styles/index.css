@@ -36,6 +36,7 @@ body {
   font-weight: 700;
 }
 .bt-cancel {
+  text-align: center;
   outline: none;
   border: none;
   cursor: pointer;
@@ -43,10 +44,19 @@ body {
   background-color: red;
   color: white;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-right: 10px;
   border-radius: 20px;
 }
 .bt-cancel:hover {
   background-color: rgb(255, 71, 71);
+}
+.validate-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: red;
+}
+.row-bt {
+  display: flex;
+  align-items: center;
 }

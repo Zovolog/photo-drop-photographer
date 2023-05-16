@@ -11,22 +11,18 @@ import logo from "./logo.png";
 import { useCookies } from "react-cookie";
 import { Loader } from "../Loader/Loader";
 import { Api } from "../../hooks/api";
-import ImageUploader from "../ImageUploader/ImageUploader";
-import plus from "./plus.png";
 import { Link } from "react-router-dom";
 export const AlbumList: React.FC = () => {
   const [cookies] = useCookies(["access_token"]);
   const { getAlbums, albums } = Api("all-albums");
-  const [open, setOpen] = useState(false);
-  const [name, getName] = useState("");
-  const [location, getLocation] = useState("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [name, getName] = useState<string>("");
+  const [location, getLocation] = useState<string>("");
   const [datepicker, getDatepicker] = useState("");
   const [validateName, showValidateName] = useState("");
   const [validateLocation, showValidateLocation] = useState("");
   const [validateDatepicker, showValidateDatepicker] = useState("");
   const [count, setCount] = useState(0);
-  const [openLoaderPhotos, setOpenLoaderPhotos] = useState(false);
-  const [albumId, setAlbumId] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -90,7 +86,7 @@ export const AlbumList: React.FC = () => {
         {albums.length > 0 ? (
           <div className="album-list">
             {albums.map((album: any, i) => (
-              <Link key={i} to={`/album-list/${album.albumId}`}>
+              <Link key={i} to={`/album-list/${album.albumId}`} tabIndex={1}>
                 <div className="album">
                   <div className="album-block">
                     <img
@@ -102,15 +98,6 @@ export const AlbumList: React.FC = () => {
                       <p>{album.location}</p>
                     </div>
                   </div>
-                  <button
-                    onClick={() => {
-                      setOpenLoaderPhotos(true);
-                      setAlbumId(album.albumId);
-                    }}
-                    className="bt-photos"
-                  >
-                    <img src={plus} className="bt-photos-icon" />
-                  </button>
                 </div>
               </Link>
             ))}

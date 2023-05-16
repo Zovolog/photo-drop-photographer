@@ -14,7 +14,6 @@ export const Api = (endpoint: string) => {
       headers: { authorization: cookies.access_token },
     })
       .then(function (response) {
-        console.log(response.data.data);
         setAlbums(response.data.data);
       })
       .catch(function (error) {
