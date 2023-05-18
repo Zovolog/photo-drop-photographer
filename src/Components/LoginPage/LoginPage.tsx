@@ -5,9 +5,9 @@ import axios from "axios";
 import { token } from "../../App";
 import { useCookies } from "react-cookie";
 export const LoginPage: React.FC = () => {
-  const [login, getLogin] = useState("");
-  const [password, getPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [login, getLogin] = useState<string>("");
+  const [password, getPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["access_token"]);
   const { getIsAuthorized } = useContext(token);
